@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
+    xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+    <meta charset="utf-8"> <!-- utf-8 works for most cases -->
+    <meta name="viewport" content="width=device-width"> <!-- Forcing initial-scale shouldn't be necessary -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Use the latest (edge) version of IE rendering engine -->
+    <meta name="x-apple-disable-message-reformatting"> <!-- Disable auto-scale in iOS 10 Mail entirely -->
+    <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no">
+    <!-- Tell iOS not to automatically link certain text strings. -->
+    <meta name="color-scheme" content="light dark">
+    <meta name="supported-color-schemes" content="light dark">
+    <title></title> <!-- The title tag shows in email notifications, like Android 4.4. -->
+
+    <!-- What it does: Makes background images in 72ppi Outlook render at correct size. -->
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:AllowPNG/>
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+    </xml>
+    <![endif]-->
+
+    <!-- Web Font / @font-face : BEGIN -->
+    <!-- NOTE: If web fonts are not required, lines 23 - 41 can be safely removed. -->
+
+    <!-- Desktop Outlook chokes on web font references and defaults to Times New Roman, so we force a safe fallback font. -->
+    <!--[if mso]>
+        <style>
+            * {
+                font-family: serif !important;
+            }
+        </style>
+    <![endif]-->
+
+    <!-- All other clients get the webfont reference; some will render the font and others will silently fail to the fallbacks. More on that here: http://stylecampaign.com/blog/2015/02/webfont-support-in-email/ -->
+    <!--[if !mso]><!-->
+    <!-- insert web font reference, eg: <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'> -->
+    <!--<![endif]-->
+
+    <!-- Web Font / @font-face : END -->
+
+    <!-- CSS Reset : BEGIN -->
+    <style>
+        /* What it does: Tells the email client that only light styles are provided but the client can transform them to dark. A duplicate of meta color-scheme meta tag above. */
+        :root {
+            color-scheme: light dark;
+            supported-color-schemes: light dark;
+        }
+
+        /* What it does: Remove spaces around the email design added by some email clients. */
+        /* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
+        html,
+        body {
+            margin: 0 auto !important;
+            padding: 0 !important;
+            height: 100% !important;
+            width: 100% !important;
+        }
+
+        /* What it does: Stops email clients resizing small text. */
+        * {
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        /* What it does: Centers email on Android 4.4 */
+        div[style*="margin: 16px 0"] {
+            margin: 0 !important;
+        }
+
+        /* What it does: forces Samsung Android mail clients to use the entire viewport */
+        #MessageViewBody,
+        #MessageWebViewDiv {
+            width: 100% !important;
+        }
+
+        /* What it does: Stops Outlook from adding extra spacing to tables. */
+        table,
+        td {
+            mso-table-lspace: 0pt !important;
+            mso-table-rspace: 0pt !important;
+        }
+
+        /* What it does: Fixes webkit padding issue. */
+        table {
+            border-spacing: 0 !important;
+            border-collapse: collapse !important;
+            table-layout: fixed !important;
+            margin: 0 auto !important;
+        }
+
+        /* What it does: Uses a better rendering method when resizing images in IE. */
+        img {
+            -ms-interpolation-mode: bicubic;
+        }
+
+        /* What it does: Prevents Windows 10 Mail from underlining links despite inline CSS. Styles for underlined links should be inline. */
+        a {
+            text-decoration: none;
+        }
+
+        /* What it does: A work-around for email clients meddling in triggered links. */
+        a[x-apple-data-detectors],
+        /* iOS */
+        .unstyle-auto-detected-links a,
+        .aBn {
+            border-bottom: 0 !important;
+            cursor: default !important;
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+        }
+
+        /* What it does: Prevents Gmail from changing the text color in conversation threads. */
+        .im {
+            color: inherit !important;
+        }
+
+        /* What it does: Prevents Gmail from displaying a download button on large, non-linked images. */
+        .a6S {
+            display: none !important;
+            opacity: 0.01 !important;
+        }
+
+        /* If the above doesn't work, add a .g-img class to any image in question. */
+        img.g-img+div {
+            display: none !important;
+        }
+
+        /* What it does: Removes right gutter in Gmail iOS app: https://github.com/TedGoas/Cerberus/issues/89  */
+        /* Create one of these media queries for each additional viewport size you'd like to fix */
+
+        /* iPhone 4, 4S, 5, 5S, 5C, and 5SE */
+        @media only screen and (min-device-width: 320px) and (max-device-width: 374px) {
+            u~div .email-container {
+                min-width: 320px !important;
+            }
+        }
+
+        /* iPhone 6, 6S, 7, 8, and X */
+        @media only screen and (min-device-width: 375px) and (max-device-width: 413px) {
+            u~div .email-container {
+                min-width: 375px !important;
+            }
+        }
+
+        /* iPhone 6+, 7+, and 8+ */
+        @media only screen and (min-device-width: 414px) {
+            u~div .email-container {
+                min-width: 414px !important;
+            }
+        }
+
+        /* Dark Mode Styles : BEGIN */
+        @media (prefers-color-scheme: dark) {
+            body {
+                /* background-color: red !important; */
+            }
+
+            h1,
+            h2,
+            h3,
+            td {
+                /* color: #9ea1f9 !important; */
+                /* padding: 0px 0px 0px 0px !important; */
+            }
+        }
+
+
+
+        /* Dark Mode Styles : END */
+    </style>
+    <!-- CSS Reset : END -->
+
+    <!-- Progressive Enhancements : BEGIN -->
+    <style>
+        /* What it does: Hover styles for buttons */
+        .button-td,
+        .button-a {
+            transition: all 100ms ease-in;
+        }
+
+        /* .button-td-primary:hover,
+        .button-a-primary:hover {
+            background: #555555 !important;
+            border-color: #555555 !important;
+        } */
+
+        /* Media Queries */
+        @media screen and (max-width: 640px) {
+
+            /* What it does: Forces table cells into full-width rows. */
+            .stack-column,
+            .stack-column-center {
+                display: block !important;
+                /* width: 100% !important; */
+                /* max-width: 100% !important; */
+                direction: ltr !important;
+            }
+
+            /* And center justify these ones. */
+            .stack-column-center {
+                text-align: center !important;
+            }
+
+            /* What it does: Generic utility class for centering. Useful for images, buttons, and nested tables. */
+            .center-on-narrow {
+                text-align: center !important;
+                display: block !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                float: none !important;
+            }
+
+            table.center-on-narrow {
+                display: inline-block !important;
+            }
+
+            /* What it does: Adjust typography on small screens to improve readability */
+            .email-container p li {
+                font-size: 17px !important;
+            }
+        }
+    </style>
+    <!-- Progressive Enhancements : END -->
+
+</head>
+<!--
+	The email background color (#222222) is defined in three places:
+	1. body tag: for most email clients
+	2. center tag: for Gmail and Inbox mobile apps and web versions of Gmail, GSuite, Inbox, Yahoo, AOL, Libero, Comcast, freenet, Mail.ru, Orange.fr
+	3. mso conditional: For Windows 10 Mail
+-->
+
+<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #f6f2ef;">
+    <center role="article" aria-roledescription="email" lang="en" style="width: 100%; background-color: #f6f2ef;">
+        <!--[if mso | IE]>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #d5a965;">
+    <tr>
+    <td>
+    <![endif]-->
+
+        <!-- Visually Hidden Preheader Text : BEGIN -->
+        <div style="max-height:0; overflow:hidden; mso-hide:all;" aria-hidden="true">
+            What if you could do holiday shopping that intentionally aligns with your values? This year, Flourish Planet
+            is your solution for making a positive change in the world of holiday gift shopping. </div>
+        <!-- Visually Hidden Preheader Text : END -->
+
+        <!-- Create white space after the desired preview text so email clients don’t pull other distracting text into the inbox preview. Extend as necessary. -->
+        <!-- Preview Text Spacing Hack : BEGIN -->
+        <div
+            style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
+            &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
+        </div>
+        <!-- Preview Text Spacing Hack : END -->
+
+        <!--
+            Set the email width. Defined in two places:
+            1. max-width for all clients except Desktop Windows Outlook, allowing the email to squish on narrow but never go wider than 680px.
+            2. MSO tags for Desktop Windows Outlook enforce a 680px width.
+            Note: The Fluid and Responsive templates have a different width (600px). The hybrid grid is more "fragile", and I've found that 680px is a good width. Change with caution.
+        -->
+        <div style="max-width: 680px; margin: 0 auto;" class="email-container">
+            <!--[if mso]>
+            <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="680">
+            <tr>
+            <td>
+            <![endif]-->
+
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"
+                style="max-width: 680px; background-color: #d5a965;">
+                <tr>
+                    <td
+                        style="padding: 20px; font-family: sans-serif; font-size: 12px; line-height: 15px; text-align: center; color: #ffffff;">
+                        <a href="https://joyful-scone-0c8f48.netlify.app/" target="_blank"
+                            style="color: #ffffff; text-decoration: underline; font-weight: bold;">View as a Web
+                            Page</a>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Email Body : BEGIN -->
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
+                <!-- Email Header : BEGIN -->
+                <tr>
+                    <td style="padding: 20px 0; text-align: center; background-color:#f6f2ef;">
+                        <img src="https://mcusercontent.com/38517d65bda74bc36d34f8252/images/20e08b44-3cf4-0e91-a8f7-e1f4e0eec1a1.png"
+                            width="280" height="auto" alt="Flourish Logo" border="0"
+                            style="height: auto; background: #f6f2ef; font-family: sans-serif; font-size: 15px; line-height: 15px; color: #f6f2ef;">
+                    </td>
+                </tr>
+                <!-- Email Header : END -->
+
+                <!-- Hero Image, Flush : BEGIN -->
+                <!-- Hero Image, Flush : END -->
+
+                <!-- 1 Column Text + Button : BEGIN -->
+                <tr>
+                    <td style="background-color: #c5b2b0;">
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <tr>
+                                <td
+                                    style="padding: 20px 20px 35px 20px; font-family: serif; font-size: 20px; line-height: 20px; color: #1e534e; text-align:center;">
+                                    <h1
+                                        style="padding: 0 0 10px 0; font-family: serif; font-size: 30px; line-height: 30px; color: #1e534e; font-weight: normal;">
+                                        Dear Friends and Family,</h1>
+                                    <p style="margin: 0; line-height: 25px;">It’s getting to be that time of year again,
+                                        where nature retreats into quiet and calm as the days grow shorter and the
+                                        weather colder. As humans, the holiday season can often feel the opposite of
+                                        calm; while full of fun and celebration, it can also involve much planning,
+                                        organization, and of course, last minute shopping.
+                                    </p>
+                                    <h2
+                                        style="padding: 20px; font-family: serif; font-size: 25px; line-height: 30px; color: #1e534e; font-weight: normal;">
+                                        What’s different about Flourish Planet? </h2>
+                                    <h2
+                                        style="padding: 0px 0 15px 0; font-family: serif; font-size: 22px; line-height: 30px; color: #1e534e; font-weight: normal;">
+                                        We commit to our values: <strong>Integrity</strong>,
+                                        <strong>Inclusivity</strong>, <strong>Sustainability</strong>, and
+                                        <strong>Transparency</strong>.
+                                    </h2>
+                                    <p style="padding:0 0 30px 0; margin:0; line-height: 25px;">It’s getting to be that
+                                        time of year again, where nature retreats into quiet and calm as the days grow
+                                        shorter and the weather colder. As humans, the holiday season can often feel the
+                                        opposite of calm; while full of fun and celebration, it can also involve much
+                                        planning, organization, and of course, last minute shopping. </p>
+
+                                    <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0"
+                                        style="margin: auto;">
+                                        <tr>
+                                            <td class="button-td button-td-primary"
+                                                style="border-radius: 4px; background: #222222;">
+                                                <a class="button-a button-a-primary"
+                                                    href="https://flourishplanet.com/holiday2023" target="_blank"
+                                                    style="background: #1e534e; border: 1px solid #1e534e; font-family: serif; font-size: 20px; line-height: 25px; text-decoration: none; padding: 13px 17px; color: #ffffff; display: block; border-radius: 4px;">Start
+                                                    Shopping <br /> With Intention</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td
+                                    style="background-color: #1e534e; padding: 20px; font-family: serif; font-size: 20px; line-height: 20px; color: #ffffff;">
+                                    <p style="padding: 10px 0; line-height: 25px; text-align:center;">At Flourish
+                                        Planet, our maker-driven marketplace connects you directly with makers and
+                                        artisans from around the world. And each time you buy, you are supporting them
+                                        directly - their livelihoods, families, and communities who are positively
+                                        shaped from work that brings sustainability, transparency, dignity, and
+                                        equality. </p>
+
+                                    <p style="padding: 10px 0; line-height: 25px; text-align:center;">With the spirit of
+                                        slow, conscious giving at the heart of our efforts, we have created a curated
+                                        holiday shopping experience that includes beautiful, handmade gifts from around
+                                        the world, and provides life changing income for makers. We invite you to join
+                                        us, from October 15th onward, to shop early, reduce the stress and bustle of the
+                                        holiday season, and find gifts to delight your family and friends with gifts
+                                        that make statements and tell stories. You will be connected to a community of
+                                        makers whose items are beautiful, useful, timeless, sustainable, and affordable.
+                                    </p>
+
+                                    <h1
+                                        style="padding: 10px 0; text-align:center; font-size: 25px; line-height: 30px; font-weight: normal;">
+                                        I. Shop with Intention, feel the love.</h1>
+                                    <ul style="padding: 0 0 10px 30px; margin: 0; list-style-type: disc;">
+                                        <li style="padding:10px 0; line-height: 25px;" class="list-item-first">
+                                            The first is to simply go to <!--[if mso]>
+                                            <p class="MsoNormal">
+                                            <a href="https://FlourishPlanet.com/holiday2023" target="_blank" style="color: #ffffff; text-decoration: underline;">
+                                                FlourishPlanet.com/holiday2023
+                                            </a>
+                                            </p>
+                                            <![endif]-->
+                                            <!--[if !mso]><!-->
+                                            <a href="https://FlourishPlanet.com/holiday2023" target="_blank"
+                                                style="color: #ffffff; text-decoration: underline;">FlourishPlanet.com/holiday2023</a>
+                                            <!--<![endif]-->
+                                            and start browsing the gifts we have curated for you to give to your loved
+                                            ones.
+                                        </li>
+                                        <li style="padding:10px 0; line-height: 25px;" class="list-item-last"> To show
+                                            you how much we appreciate you, we will offer you a 20% discount on your
+                                            final order.
+                                        </li>
+                                        <li style="padding:10px 0; line-height: 25px;" class="list-item-last">Simply
+                                            choose your items for all your loved ones, pay with your discount, then wait
+                                            with anticipation for your goods to arrive.</li>
+                                        <li style="padding:10px 0; line-height: 25px;" class="list-item-last">For gifts
+                                            coming from India, this could take 3-4 weeks.
+                                        </li>
+                                    </ul>
+                                    <h1
+                                        style="margin: 20px 0 10px; text-align:center; font-size: 25px; line-height: 30px; font-weight: normal;">
+                                        II. Spread the Love</h1>
+                                    <p style="padding:30px 0 10px 0; margin:0; line-height: 25px; text-align:center;">To
+                                        help spread the love, please extend this discount amongst your own networks,
+                                        family, and friends. Every time a friend or family member purchases from
+                                        Flourish Planet, they are uplifting global makers, indigenous artisans, their
+                                        communities and families – in short, your purchase has purpose and power.
+                                    </p>
+                                    <p style="padding:30px 0  0; margin:0; line-height: 25px; text-align:center;">
+                                        Explore the collection here, and happy shopping:<br> <!--[if mso]>
+                                            <p class="MsoNormal">
+                                            <a href="https://FlourishPlanet.com/holiday2023" target="_blank" style="color: #ffffff; text-decoration: underline;">
+                                                FlourishPlanet.com/holiday2023
+                                            </a>
+                                            </p>
+                                            <![endif]-->
+                                        <!--[if !mso]><!-->
+                                        <a href="https://FlourishPlanet.com/holiday2023" target="_blank"
+                                            style="color: #ffffff; text-decoration: underline;">FlourishPlanet.com/holiday2023</a>
+                                        <!--<![endif]-->
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+
+
+                <!-- 1 Column Text + Button : END -->
+                <tr>
+                    <td align="center" valign="top" style="font-size:0;  background-color: #d5a965;"" >
+                        <img src="
+                        https://mcusercontent.com/38517d65bda74bc36d34f8252/images/c56ef3db-d534-4c91-eb05-121da64346bf.png"
+                        alt="slant design" width="100%" height="auto" border="0" style="display: block; padding:0;">
+                    </td>
+                </tr>
+
+                <!-- 2 Even Columns : BEGIN -->
+                <tr>
+                    <td align="center" valign="top" style="font-size:0;  background-color: #d5a965; padding:10px;">
+                        <!--[if mso]>
+                        <table role="presentation" border="0" cellspacing="0" cellpadding="0" width="660">
+                        <tr>
+                        <td valign="top" width="330">
+                        <![endif]-->
+                        <div style="display:inline-block;margin: 0 -1px;width:100%;min-width:200px;max-width: 280px;vertical-align:middle;max-height: 280px;min-height:200px;padding: 10px;"
+                            class="stack-column">
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"
+                                style="font-size: 14px;">
+                                <tbody>
+                                    <tr align="center" valign="middle"
+                                        style="/* padding:20px; */width:100%;/* background-color:#c5b2b0; */min-width:200px;max-width:244px;vertical-align:middle;max-height: 280px;min-height:200px;">
+                                        <td align="center" valign="middle"
+                                            style="/* padding:10px; */height: 280px;min-height:200px;border-radius: 15px;background-color: #c5b2b0;">
+                                            <!-- Button : BEGIN -->
+                                            <table align="center" role="presentation" cellspacing="0" cellpadding="0"
+                                                border="0" style="margin: auto; vertical-align: middle; ">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="button-td button-td-primary">
+                                                            <!--[if mso]>
+                                                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://google.com/" style="height:40px;v-text-anchor:middle;width:200px;" arcsize="10%" strokecolor="#1e534e" fillcolor="#1e534e">
+                                                        <w:anchorlock/>
+                                                        <center>
+                                                    <![endif]-->
+                                                            <a href="https://flourishplanet.com/holiday2023"
+                                                                target="_blank"
+                                                                style="background: #1e534e; border: 1px solid #1e534e; font-family: serif; font-size: 25px; line-height: 30px; text-decoration: none; padding: 13px 17px; color: #ffffff; display: block; border-radius: 20px;">
+                                                                Explore <br> Flourish
+                                                            </a>
+                                                            <!--[if mso]>
+                                                        </center>
+                                                    </v:roundrect>
+                                                    <![endif]-->
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <!-- Button : END -->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--[if mso]>
+                        </td>
+                        <td valign="top" width="330">
+                        <![endif]-->
+                        <div style="display:inline-block;margin: 0 -1px;width:100%;min-width:200px;max-width: 280px;vertical-align:top;padding: 10px;"
+                            class="stack-column">
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td style="/* padding: 10px; */">
+                                            <img src="https://mcusercontent.com/38517d65bda74bc36d34f8252/images/a9a973eb-15a7-828c-fe69-ea0211bda47c.jpg"
+                                                width="310" height="auto" border="0"
+                                                alt="Sustainability, Inclusivity, Transparent, Integrrity"
+                                                style="border-radius: 15px; width: 100%; max-width: 340px; height: auto; background: #dddddd; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;"
+                                                class="center-on-narrow">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--[if mso]>
+                        </td>
+                        </tr>
+                        </table>
+                        <![endif]-->
+                    </td>
+                </tr>
+
+
+                <!-- 2 Even Columns : END -->
+
+                <!-- Clear Spacer : BEGIN -->
+                <tr>
+                    <td aria-hidden="true" height="60" style="font-size: 0px; line-height: 0px;">
+                        &nbsp;
+                    </td>
+                </tr>
+                <!-- Clear Spacer : END -->
+
+                <!-- 1 Column Text : BEGIN -->
+
+                <!-- 1 Column Text : END -->
+
+            </table>
+            <!-- Email Body : END -->
+
+
+
+            <!--[if mso]>
+            </td>
+            </tr>
+            </table>
+            <![endif]-->
+        </div>
+
+        <!-- Full Bleed Background Section : BEGIN -->
+        <!-- Full Bleed Background Section : END -->
+
+        <!--[if mso | IE]>
+    </td>
+    </tr>
+    </table>
+    <![endif]-->
+    </center>
+</body>
+
+</html>
